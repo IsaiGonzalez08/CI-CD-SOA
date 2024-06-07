@@ -34,14 +34,18 @@ def imageId = sh(script: 'docker images -q soa-deploy:latest', returnStdout: tru
             }
         }
         stage('Test') {
-steps {
+            steps {
                 echo 'Testing ...'
-                
-                sh 'npm install'
+
+
+                withEnv(['PORT=4000']) {
+                    sh 'npm install'
                 sh 'npm install --production'
                 sh 'npm install mocha'
-                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                    catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                     
                     sh 'npm test'
+                }
                 }
             }
         }
