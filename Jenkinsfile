@@ -58,7 +58,7 @@ post {
                     sh "docker stop soa-deploy-test"
                     sh "docker rm soa-deploy-test"
                 }
-                sh "docker run -d -p 3000:3000 --name soa-deploy-test soa-deploy:latest"
+                sh "docker run -d -p 5000:5000 --name soa-deploy-test soa-deploy:latest"
             }
         }
         failure {
